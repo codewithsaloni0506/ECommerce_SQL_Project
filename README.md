@@ -1,42 +1,36 @@
--- Create products table
-CREATE TABLE products (
-  product_id INT AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
-  category VARCHAR(50),
-  price DECIMAL(10,2),
-  stock INT,
-  PRIMARY KEY (product_id)
-);
+# E-Commerce SQL Project
 
--- Create orders table
-CREATE TABLE orders (
-  order_id INT AUTO_INCREMENT,
-  product_id INT,
-  quantity INT,
-  order_date DATE,
-  PRIMARY KEY (order_id),
-  FOREIGN KEY (product_id) REFERENCES products(product_id)
-);
+![SQL Badge](https://img.shields.io/badge/SQL-Skills-blue)
 
--- Insert products
-INSERT INTO products (name, category, price, stock)
-VALUES
-('Laptop', 'Electronics', 55000, 10),
-('Headphones', 'Electronics', 1500, 50),
-('T-shirt', 'Clothing', 400, 100),
-('Shoes', 'Footwear', 1200, 40),
-('Smartphone', 'Electronics', 35000, 25);
+## Description
+This is a sample SQL project for tracking products and orders in an e-commerce system.  
+It demonstrates the creation of tables, inserting sample data, and running queries to showcase SQL skills like **SELECT, JOIN, WHERE, GROUP BY, UPDATE, and DELETE**.
 
--- Insert orders
-INSERT INTO orders (product_id, quantity, order_date)
-VALUES
-(1, 1, '2025-08-10'),
-(2, 2, '2025-08-11'),
-(3, 5, '2025-08-12'),
-(5, 1, '2025-08-13'),
-(4, 3, '2025-08-14');
+---
+
+## Tables
+
+### 1. `products`
+| Column      | Type          | Description                     |
+|------------|---------------|---------------------------------|
+| product_id | INT           | Primary key, auto-increment ID  |
+| name       | VARCHAR(100)  | Product name                    |
+| category   | VARCHAR(50)   | Product category                |
+| price      | DECIMAL(10,2) | Product price                   |
+| stock      | INT           | Available quantity in stock     |
+
+### 2. `orders`
+| Column     | Type    | Description                          |
+|-----------|---------|--------------------------------------|
+| order_id  | INT     | Primary key, auto-increment ID       |
+| product_id| INT     | Foreign key referencing `products`   |
+| quantity  | INT     | Quantity of the product ordered      |
+| order_date| DATE    | Date when the order was placed       |
+
+---
 
 SELECT * FROM products;
+
 SELECT * FROM orders;
 SELECT p.name, SUM(o.quantity * p.price) AS total_sales
 FROM orders o
@@ -45,10 +39,11 @@ GROUP BY p.name;
 
 SELECT * FROM products
 WHERE stock < 20;
+
 UPDATE orders
 SET quantity = 2
 WHERE order_id = 1;
+
 DELETE FROM orders
 WHERE order_id = 5;
-
 
